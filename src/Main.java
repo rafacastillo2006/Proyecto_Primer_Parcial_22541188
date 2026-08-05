@@ -8,6 +8,6 @@ public class Main {
 
         GestorJugadores gestorJugadores = new GestorJugadores();
 
-        new PaginaInicio(gestorJugadores);
+        new Tablero(gestorJugadores);
     }
 }

@@ -3,34 +3,29 @@ import java.awt.*;
 
 public class Tablero extends JFrame {
 
-    private JButton[][] botonesCasillas = new JButton[6][6];
+    private GestorJugadores gestorJugadores;
 
-    public Tablero() {
-        setTitle("Vampire Wargame - Tablero");
-        setSize(800, 800);
+    public Tablero(GestorJugadores gestorJugadores) {
+
+        this.gestorJugadores = gestorJugadores;
+
+        setTitle("Tablero de Juego");
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(true);
         setLocationRelativeTo(null);
-        setResizable(false);
 
-        JPanel panelTablero = new JPanel();
-        panelTablero.setLayout(new GridLayout(6, 6));
+        Dimension tamañoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
 
-        for (int fila = 0; fila < 6; fila++) {
-            for (int col = 0; col < 6; col++) {
-                JButton casilla = new JButton();
+        ImageIcon imagenFondo = new ImageIcon(getClass().getResource("/fondopantallainicio.jpg"));
+        Image imagenAgrandada = imagenFondo.getImage().getScaledInstance(tamañoPantalla.width, tamañoPantalla.height, Image.SCALE_SMOOTH);
 
-                if ((fila + col) % 2 == 0) {
-                    casilla.setBackground(Color.WHITE);
-                } else {
-                    casilla.setBackground(Color.DARK_GRAY.brighter());
-                }
+        JLabel fondoLabel = new JLabel(new ImageIcon(imagenAgrandada));
+        fondoLabel.setLayout(new GridBagLayout());
+        setContentPane(fondoLabel);
 
-                botonesCasillas[fila][col] = casilla;
-                panelTablero.add(casilla);
-            }
-        }
-
-        add(panelTablero);
         setVisible(true);
+
+
     }
 }
