@@ -1,8 +1,11 @@
 
-public final class Vampire extends Pieza{
+public final class Vampire extends Pieza {
+
+    private static final int VIDA_MAXIMA = 4;
 
     public Vampire(Jugador propietario, String rImagen) {
-        super("Vampire", 3, 4, 5, propietario, rImagen);}
+        super("Vampire", 3, 4, 5, propietario, rImagen);
+    }
 
     @Override
     public boolean esMovimientoValido(int fO, int cO, int fD, int cD, Pieza[][] tablero) {
@@ -11,7 +14,7 @@ public final class Vampire extends Pieza{
 
         if (difFila == 0 && difCol == 0) return false;
 
-        return (difFila <= 1) && (difCol <= 1);
+        return difFila <= 1 && difCol <= 1;
     }
 
     @Override
@@ -21,6 +24,7 @@ public final class Vampire extends Pieza{
             tablero[fO][cO] = null;
             return true;
         }
+
         return false;
     }
 
@@ -29,20 +33,36 @@ public final class Vampire extends Pieza{
         enemigo.danoPieza(this.ataque);
 
         if (!enemigo.estaViva()) {
-            return "Se destruyó la pieza " + enemigo.getNombre() + " del jugador " + enemigo.getPropietario().getUsername() + ".";
+            return "Se destruyó la pieza " + enemigo.getNombre() +
+                    " del jugador " + enemigo.getPropietario().getUsername() + ".";
         }
-        return "Se atacó la pieza " + enemigo.getNombre() + " y se le quitaron " + this.ataque + " puntos; " +
-                "le quedan " + enemigo.getEscudo() + " puntos de escudo y " + enemigo.getVida() + " de vida.";
+
+        return "Se atacó la pieza " + enemigo.getNombre() +
+                " y se le quitaron " + this.ataque + " puntos; " +
+                "le quedan " + enemigo.getEscudo() +
+                " puntos de escudo y " + enemigo.getVida() + " de vida.";
     }
 
     public String absorberSangre(Pieza enemigo) {
         enemigo.danoVida(1);
-        this.vida += 1;
+
+        if (this.vida < VIDA_MAXIMA) {
+            this.vida++;
+        }
 
         if (!enemigo.estaViva()) {
-            return "¡Absorción fatal! Se destruyó la pieza " + enemigo.getNombre() + " del jugador " + enemigo.getPropietario().getUsername() + ".";
+            return "¡Absorción fatal! Se destruyó la pieza " +
+                    enemigo.getNombre() +
+                    " del jugador " +
+                    enemigo.getPropietario().getUsername() + ".";
         }
-        return "El Vampiro absorbió 1 punto de vida de " + enemigo.getNombre() + ". " +
-                "Le quedan " + enemigo.getEscudo() + " de escudo y " + enemigo.getVida() + " de vida.";
+
+        return "El Vampiro absorbió 1 punto de vida de " +
+                enemigo.getNombre() +
+                ". Le quedan " +
+                enemigo.getEscudo() +
+                " de escudo y " +
+                enemigo.getVida() +
+                " de vida.";
     }
 }
