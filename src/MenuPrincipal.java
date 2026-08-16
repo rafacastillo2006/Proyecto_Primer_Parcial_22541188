@@ -85,6 +85,11 @@ public class MenuPrincipal extends JFrame {
             this.dispose();
         });
 
+        reportes.addActionListener(e -> {
+            new  PanelReportes(this.gestorJugadores);
+            this.dispose();
+        });
+
         setVisible(true);
     }
 
