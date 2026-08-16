@@ -26,7 +26,7 @@ public class MisReportes extends JFrame {
 
         GridBagConstraints gbc = new GridBagConstraints();
 
-        JLabel labelTitulo = new JLabel("MIS REPORTES", SwingConstants.CENTER);
+        JLabel labelTitulo = new JLabel("Mis Reportes", SwingConstants.CENTER);
         labelTitulo.setFont(new Font("Algerian", Font.BOLD, 45));
         labelTitulo.setForeground(Color.WHITE);
 
@@ -38,7 +38,7 @@ public class MisReportes extends JFrame {
         gbc.insets = new Insets(320, 10, 15, 10);
         fondoLabel.add(labelTitulo, gbc);
 
-        String[] columnas = {"USUARIO", "PUNTOS DE VICTORIA", "ESTADO DE SESIÓN"};
+        String[] columnas = {"Usuario", "Puntos de Victoria", "Estado de Sesión"};
         DefaultTableModel modeloTabla = new DefaultTableModel(columnas, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -78,12 +78,12 @@ public class MisReportes extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
         fondoLabel.add(scrollTabla, gbc);
 
-        JButton btnVolver = new JButton("VOLVER");
-        btnVolver.setOpaque(true);
-        btnVolver.setBackground(Color.WHITE);
-        btnVolver.setFont(new Font("Algerian", Font.BOLD, 20));
-        btnVolver.setPreferredSize(new Dimension(160, 45));
-        btnVolver.addActionListener(e -> {
+        JButton btnRegresar = new JButton("Regresar");
+        btnRegresar.setOpaque(true);
+        btnRegresar.setBackground(Color.WHITE);
+        btnRegresar.setFont(new Font("Algerian", Font.BOLD, 20));
+        btnRegresar.setPreferredSize(new Dimension(160, 45));
+        btnRegresar.addActionListener(e -> {
             new PanelReportes(gestorJugadores);
             this.dispose();
         });
@@ -94,7 +94,7 @@ public class MisReportes extends JFrame {
         gbc.weighty = 0.0;
         gbc.anchor = GridBagConstraints.SOUTHEAST;
         gbc.insets = new Insets(10, 10, 30, 40);
-        fondoLabel.add(btnVolver, gbc);
+        fondoLabel.add(btnRegresar, gbc);
 
         setVisible(true);
     }

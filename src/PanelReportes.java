@@ -80,9 +80,10 @@ public class PanelReportes extends JFrame {
         });
         botonMisReportes.addActionListener(e -> {
             new MisReportes(gestorJugadores);
+            dispose();
         });
         regresarMenu.addActionListener(e -> {
-            new PaginaInicio(this.gestorJugadores);
+            new MenuPrincipal(this.gestorJugadores);
             this.dispose();
         });
     }

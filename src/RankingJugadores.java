@@ -2,7 +2,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class RankingJugadores extends JFrame {
@@ -39,7 +38,7 @@ public class RankingJugadores extends JFrame {
         gbc.insets = new Insets(320, 10, 15, 10);
         fondoLabel.add(labelTitulo, gbc);
 
-        String[] columnas = {"POSICIÓN", "USUARIO", "PUNTOS DE VICTORIA"};
+        String[] columnas = {"Posición", "Usuario", "Puntos de Victoria"};
         DefaultTableModel modeloTabla = new DefaultTableModel(columnas, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -47,15 +46,7 @@ public class RankingJugadores extends JFrame {
             }
         };
 
-        ArrayList<Jugador> listaCompleta = new ArrayList<>();
-        if (gestorJugadores.getJugadoresOponentesDisponibles() != null) {
-            listaCompleta.addAll(Arrays.asList(gestorJugadores.getJugadoresOponentesDisponibles()));
-        }
-        if (gestorJugadores.getJugadorLoggedIn() != null) {
-            listaCompleta.add(gestorJugadores.getJugadorLoggedIn());
-        }
-
-        Jugador[] jugadores = listaCompleta.toArray(new Jugador[0]);
+        Jugador[] jugadores = gestorJugadores.getTodosLosJugadores();
         Arrays.sort(jugadores, (j1, j2) -> Integer.compare(j2.getPuntaje(), j1.getPuntaje()));
 
         int posicion = 1;
@@ -91,12 +82,12 @@ public class RankingJugadores extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
         fondoLabel.add(scrollTabla, gbc);
 
-        JButton btnVolver = new JButton("VOLVER");
-        btnVolver.setOpaque(true);
-        btnVolver.setBackground(Color.WHITE);
-        btnVolver.setFont(new Font("Algerian", Font.BOLD, 20));
-        btnVolver.setPreferredSize(new Dimension(160, 45));
-        btnVolver.addActionListener(e -> {
+        JButton botonRegresar = new JButton("Regresar");
+        botonRegresar.setOpaque(true);
+        botonRegresar.setBackground(Color.WHITE);
+        botonRegresar.setFont(new Font("Algerian", Font.BOLD, 20));
+        botonRegresar.setPreferredSize(new Dimension(160, 45));
+        botonRegresar.addActionListener(e -> {
             new PanelReportes(gestorJugadores);
             this.dispose();
         });
@@ -107,7 +98,7 @@ public class RankingJugadores extends JFrame {
         gbc.weighty = 0.0;
         gbc.anchor = GridBagConstraints.SOUTHEAST;
         gbc.insets = new Insets(10, 10, 30, 40);
-        fondoLabel.add(btnVolver, gbc);
+        fondoLabel.add(botonRegresar, gbc);
 
         setVisible(true);
     }

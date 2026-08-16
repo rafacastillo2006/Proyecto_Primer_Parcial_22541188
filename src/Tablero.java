@@ -28,13 +28,13 @@ public class Tablero extends JFrame {
     private int filaSeleccionada = -1;
     private int colSeleccionada = -1;
 
-    private final Color COLOR_FONDO_OSCURO = Color.decode("#0a0f1d");
-    private final Color COLOR_PANEL_LATERAL = Color.decode("#0d1527");
-    private final Color COLOR_BORDE_AZUL = Color.decode("#22487a");
-    private final Color COLOR_AZUL_BRILLANTE = Color.decode("#3fa9f5");
-    private final Color COLOR_AZUL_MEDIO = Color.decode("#3179b8");
-    private final Color COLOR_CASILLA_CLARA = Color.decode("#182846");
-    private final Color COLOR_CASILLA_OSCURA = Color.decode("#0e172a");
+    private final Color fondoOscuro = Color.decode("#0a0f1d");
+    private final Color colorPanelRuleta = Color.decode("#0d1527");
+    private final Color bordeAzul = Color.decode("#22487a");
+    private final Color azulBrilloso = Color.decode("#3fa9f5");
+    private final Color azulMedio = Color.decode("#3179b8");
+    private final Color colorCasilla1 = Color.decode("#182846");
+    private final Color colorCasilla2 = Color.decode("#0e172a");
 
     public Tablero(GestorJugadores gestorJugadores, Jugador oponente) {
         this.gestorJugadores = gestorJugadores;
@@ -71,15 +71,15 @@ public class Tablero extends JFrame {
     private JPanel armarPanelArriba() {
         JPanel header = new JPanel();
         header.setLayout(new BoxLayout(header, BoxLayout.Y_AXIS));
-        header.setBackground(COLOR_FONDO_OSCURO);
+        header.setBackground(fondoOscuro);
         header.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_BORDE_AZUL),
+                BorderFactory.createMatteBorder(0, 0, 2, 0, bordeAzul),
                 BorderFactory.createEmptyBorder(12, 10, 12, 10)
         ));
 
         labelTurno = new JLabel("Turno: " + jugadorEnTurno.getUsername());
         labelTurno.setFont(new Font("Serif", Font.BOLD, 24));
-        labelTurno.setForeground(COLOR_AZUL_BRILLANTE);
+        labelTurno.setForeground(azulBrilloso);
         labelTurno.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         labelSubtitulo = new JLabel("Gira la ruleta para determinar qué pieza puede actuar.");
@@ -97,9 +97,9 @@ public class Tablero extends JFrame {
     private JPanel crearPanelRuleta() {
         JPanel panelRuleta = new JPanel(new BorderLayout(0, 10));
         panelRuleta.setPreferredSize(new Dimension(320, 0));
-        panelRuleta.setBackground(COLOR_PANEL_LATERAL);
+        panelRuleta.setBackground(colorPanelRuleta);
         panelRuleta.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createMatteBorder(0, 0, 0, 2, COLOR_BORDE_AZUL),
+                BorderFactory.createMatteBorder(0, 0, 0, 2, bordeAzul),
                 BorderFactory.createEmptyBorder(15, 15, 15, 15)
         ));
 
@@ -112,7 +112,7 @@ public class Tablero extends JFrame {
 
         labelRuletaResultado = new JLabel("Gira la Ruleta", SwingConstants.CENTER);
         labelRuletaResultado.setFont(new Font("Serif", Font.BOLD, 16));
-        labelRuletaResultado.setForeground(COLOR_AZUL_BRILLANTE);
+        labelRuletaResultado.setForeground(azulBrilloso);
         labelRuletaResultado.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         labelGiros = new JLabel("Giros disponibles: " + (girosDisponibles - girosRealizados), SwingConstants.CENTER);
@@ -131,19 +131,19 @@ public class Tablero extends JFrame {
 
         JLabel labelRegistroMovimientos = new JLabel("Registro de Movimientos");
         labelRegistroMovimientos.setFont(new Font("Serif", Font.BOLD, 14));
-        labelRegistroMovimientos.setForeground(COLOR_AZUL_MEDIO);
+        labelRegistroMovimientos.setForeground(azulMedio);
         labelRegistroMovimientos.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
 
         areaHistorial = new JTextArea();
         areaHistorial.setEditable(false);
         areaHistorial.setFont(new Font("Monospaced", Font.PLAIN, 11));
-        areaHistorial.setBackground(COLOR_FONDO_OSCURO);
+        areaHistorial.setBackground(fondoOscuro);
         areaHistorial.setForeground(new Color(180, 210, 240));
         areaHistorial.setLineWrap(true);
         areaHistorial.setWrapStyleWord(true);
 
         JScrollPane scrollRegistro = new JScrollPane(areaHistorial);
-        scrollRegistro.setBorder(BorderFactory.createLineBorder(COLOR_BORDE_AZUL));
+        scrollRegistro.setBorder(BorderFactory.createLineBorder(bordeAzul));
 
         panelRegistro.add(labelRegistroMovimientos, BorderLayout.NORTH);
         panelRegistro.add(scrollRegistro, BorderLayout.CENTER);
@@ -153,10 +153,10 @@ public class Tablero extends JFrame {
 
         btnGirarRuleta = new JButton("Girar Ruleta");
         btnGirarRuleta.setFont(new Font("Serif", Font.BOLD, 15));
-        btnGirarRuleta.setBackground(COLOR_AZUL_MEDIO);
+        btnGirarRuleta.setBackground(azulMedio);
         btnGirarRuleta.setForeground(Color.WHITE);
         btnGirarRuleta.setFocusPainted(false);
-        btnGirarRuleta.setBorder(BorderFactory.createLineBorder(COLOR_AZUL_BRILLANTE));
+        btnGirarRuleta.setBorder(BorderFactory.createLineBorder(azulBrilloso));
         btnGirarRuleta.addActionListener(e -> girarRuleta());
 
         btnRetirarse = new JButton("Retirarse");
@@ -164,7 +164,7 @@ public class Tablero extends JFrame {
         btnRetirarse.setBackground(new Color(25, 35, 55));
         btnRetirarse.setForeground(new Color(170, 190, 210));
         btnRetirarse.setFocusPainted(false);
-        btnRetirarse.setBorder(BorderFactory.createLineBorder(COLOR_BORDE_AZUL));
+        btnRetirarse.setBorder(BorderFactory.createLineBorder(bordeAzul));
         btnRetirarse.addActionListener(e -> retirarDePartida());
 
         panelBotones.add(btnGirarRuleta);
@@ -179,7 +179,7 @@ public class Tablero extends JFrame {
 
     private JPanel crearTableroGUI() {
         JPanel panelTablero = new JPanel(new GridLayout(6, 6));
-        panelTablero.setBackground(COLOR_FONDO_OSCURO);
+        panelTablero.setBackground(fondoOscuro);
         panelTablero.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
         for (int fila = 0; fila < 6; fila++) {
@@ -190,9 +190,9 @@ public class Tablero extends JFrame {
                 btnCasilla.setBorder(BorderFactory.createLineBorder(new Color(15, 25, 45)));
 
                 if ((fila + col) % 2 == 0) {
-                    btnCasilla.setBackground(COLOR_CASILLA_CLARA);
+                    btnCasilla.setBackground(colorCasilla1);
                 } else {
-                    btnCasilla.setBackground(COLOR_CASILLA_OSCURA);
+                    btnCasilla.setBackground(colorCasilla2);
                 }
 
                 final int f = fila;
@@ -291,7 +291,7 @@ public class Tablero extends JFrame {
 
             filaSeleccionada = fila;
             colSeleccionada = col;
-            botonesTablero[fila][col].setBorder(BorderFactory.createLineBorder(COLOR_AZUL_BRILLANTE, 3));
+            botonesTablero[fila][col].setBorder(BorderFactory.createLineBorder(azulBrilloso, 3));
             registrarAccion("Pieza seleccionada en [" + fila + "][" + col + "]");
             return;
         }
@@ -371,6 +371,9 @@ public class Tablero extends JFrame {
         registrarAccion("--- Cambió el turno a " + jugadorEnTurno.getUsername() + " ---");
     }
 
+    private void declararVictoria(Jugador ganador) {
+        gestorJugadores.sumarPuntosAJugador(ganador.getUsername(), 3);
+    }
     private void verificarFinDeJuego() {
         boolean negroTienePiezas = false;
         boolean blancoTienePiezas = false;
@@ -387,8 +390,7 @@ public class Tablero extends JFrame {
 
         if (!negroTienePiezas || !blancoTienePiezas) {
             Jugador ganador = blancoTienePiezas ? jugadorBlanco : jugadorNegro;
-
-            gestorJugadores.sumarPuntosAJugador(ganador.getUsername(), 3);
+            declararVictoria(ganador);
 
             JOptionPane.showMessageDialog(this, "¡PARTIDA FINALIZADA!\nGanador: " + ganador.getUsername());
             new MenuPrincipal(gestorJugadores);
@@ -400,8 +402,7 @@ public class Tablero extends JFrame {
         int opt = JOptionPane.showConfirmDialog(this, "¿Deseas retirarte de la partida?", "Retiro", JOptionPane.YES_NO_OPTION);
         if (opt == JOptionPane.YES_OPTION) {
             Jugador ganador = (jugadorEnTurno == jugadorBlanco) ? jugadorNegro : jugadorBlanco;
-
-            gestorJugadores.sumarPuntosAJugador(ganador.getUsername(), 3);
+            declararVictoria(ganador);
 
             String msj = jugadorEnTurno.getUsername() + " se ha retirado. Ganador: " + ganador.getUsername();
             JOptionPane.showMessageDialog(this, msj);

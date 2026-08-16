@@ -71,6 +71,10 @@ public void setJugadorLoggedIn(Jugador jugadorLoggedIn) {
         return oponentes.toArray(new Jugador[0]);
     }
 
+    public Jugador[] getTodosLosJugadores() {
+        return listaJugadores.toArray(new Jugador[0]);
+    }
+
 public ArrayList<Jugador> getListaJugadores(){
             return listaJugadores;
 }
@@ -78,6 +82,7 @@ public ArrayList<Jugador> getListaJugadores(){
 public int getCantidadJugadores(){
         return listaJugadores.size();
 }
+
     public void sumarPuntosAJugador(String username, int puntos) {
         if (username == null) return;
 

@@ -53,7 +53,7 @@ public class Jugador {
 
     }
 
-    public void setPuntaje(int i) {
+    public void setPuntaje(int puntaje) {
         this.puntaje = puntaje;
     }
         @Override
