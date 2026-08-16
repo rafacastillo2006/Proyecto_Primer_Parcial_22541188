@@ -58,6 +58,18 @@ public class GestorJugadores {
 public Jugador getJugadorLoggedIn(){
             return jugadorLoggedIn;
 }
+public void setJugadorLoggedIn(Jugador jugadorLoggedIn) {
+        this.jugadorLoggedIn = jugadorLoggedIn;
+    }
+    public Jugador[] getJugadoresOponentesDisponibles() {
+        ArrayList<Jugador> oponentes = new ArrayList<>();
+        for (Jugador j : listaJugadores) {
+            if (!j.getUsername().equalsIgnoreCase(jugadorLoggedIn.getUsername())) {
+                oponentes.add(j);
+            }
+        }
+        return oponentes.toArray(new Jugador[0]);
+    }
 
 public ArrayList<Jugador> getListaJugadores(){
             return listaJugadores;
@@ -66,6 +78,16 @@ public ArrayList<Jugador> getListaJugadores(){
 public int getCantidadJugadores(){
         return listaJugadores.size();
 }
+    public void sumarPuntosAJugador(String username, int puntos) {
+        if (username == null) return;
+
+        for (Jugador j : listaJugadores) {
+            if (j.getUsername().equalsIgnoreCase(username)) {
+                j.setPuntaje(j.getPuntaje() + puntos);
+                break;
+            }
+        }
+    }
 
 }
 

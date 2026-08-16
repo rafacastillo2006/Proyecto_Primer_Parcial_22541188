@@ -1,9 +1,8 @@
 
 public final class Vampire extends Pieza{
 
-    public Vampire(Jugador propietario) {
-        super("Vampire", 3, 4, 5, propietario);
-    }
+    public Vampire(Jugador propietario, String rImagen) {
+        super("Vampire", 3, 4, 5, propietario, rImagen);}
 
     @Override
     public boolean esMovimientoValido(int fO, int cO, int fD, int cD, Pieza[][] tablero) {
@@ -27,7 +26,7 @@ public final class Vampire extends Pieza{
 
     @Override
     public String atacar(Pieza enemigo) {
-        enemigo.danoVida(this.ataque);
+        enemigo.danoPieza(this.ataque);
 
         if (!enemigo.estaViva()) {
             return "Se destruyó la pieza " + enemigo.getNombre() + " del jugador " + enemigo.getPropietario().getUsername() + ".";

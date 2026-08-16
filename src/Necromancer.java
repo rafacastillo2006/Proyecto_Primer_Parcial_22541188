@@ -1,7 +1,7 @@
-public class Necromante extends Pieza {
+public class Necromancer extends Pieza {
 
-    public Necromante(Jugador propietario) {
-        super("Necromancer", 4, 2, 1, propietario);
+    public Necromancer(Jugador propietario, String rImagen) {
+        super("Necromancer", 4, 2, 1, propietario, rImagen);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class Necromante extends Pieza {
 
     @Override
     public String atacar(Pieza enemigo) {
-        enemigo.danoVida(this.ataque);
+        enemigo.danoPieza(this.ataque);
 
         if (!enemigo.estaViva()) {
             return "Se destruyó la pieza " + enemigo.getNombre() + " del jugador " + enemigo.getPropietario().getUsername() + ".";

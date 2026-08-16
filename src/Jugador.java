@@ -53,8 +53,13 @@ public class Jugador {
 
     }
 
-    @Override
+    public void setPuntaje(int i) {
+        this.puntaje = puntaje;
+    }
+        @Override
     public String toString() {
         return "Jugador: " + username;
     }
+
+
 }

@@ -69,6 +69,9 @@ public class MenuPrincipal extends JFrame {
             ubucacionRegresar.insets = new Insets(0, 0, 30, 30);
             fondoLabel.add(panelBotonRegresar, ubucacionRegresar);
 
+        jugarPartida.addActionListener(e -> {
+            iniciarNuevaPartida();
+        });
         regresarMenu.addActionListener(e -> {
             new PaginaInicio(this.gestorJugadores);
             this.dispose();
@@ -91,6 +94,55 @@ public class MenuPrincipal extends JFrame {
         });
 
         setVisible(true);
+    }
+    private void iniciarNuevaPartida() {
+        Jugador[] oponentes = gestorJugadores.getJugadoresOponentesDisponibles();
+
+        if (oponentes == null || oponentes.length == 0) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "No hay mas jugadores en el juego, registre un jugador para iniciar.",
+                    "Sin Oponentes",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        JComboBox<Jugador> comboOponentes = new JComboBox<>(oponentes);
+
+        comboOponentes.setRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (value instanceof Jugador) {
+                    setText(((Jugador) value).getUsername());
+                }
+                return this;
+            }
+        });
+
+        Object[] mensaje = {
+                "Selecciona a tu oponente para la partida:",
+                comboOponentes
+        };
+
+        int opcion = JOptionPane.showConfirmDialog(
+                this,
+                mensaje,
+                "Seleccionar Rival",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
+
+        if (opcion == JOptionPane.OK_OPTION) {
+            Jugador oponenteSeleccionado = (Jugador) comboOponentes.getSelectedItem();
+
+            if (oponenteSeleccionado != null) {
+                new Tablero(gestorJugadores, oponenteSeleccionado);
+
+                this.dispose();
+            }
+        }
     }
 
 }

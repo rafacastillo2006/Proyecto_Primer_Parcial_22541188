@@ -11,7 +11,7 @@ public abstract class Pieza {
     protected Jugador propietarioPieza;
     protected String rImagen;
 
-    public Pieza(String nombre, int ataque, int vida, int escudo, Jugador propietario) {
+    public Pieza(String nombre, int ataque, int vida, int escudo, Jugador propietario, String rImagen) {
         this.nombre = nombre;
         this.ataque = ataque;
         this.vida = vida;
@@ -53,7 +53,7 @@ public abstract class Pieza {
     public int getEscudo() { return escudo; }
     public Jugador getPropietario() { return propietarioPieza; }
 
-    public abstract String atacar(String piezaRival);
+    public abstract String atacar(Pieza piezaRival);
 
     public abstract boolean moverPieza(int fOrigen, int cOrigen, int fDestino, int cDestino, Pieza[][] tablero);
     public abstract boolean esMovimientoValido(int fOrigen, int cOrigen, int fDestino, int cDestino, Pieza[][] tablero);
@@ -63,10 +63,12 @@ public abstract class Pieza {
     }
 
     public ImageIcon getImagen(int ancho, int alto) {
-        try{
+        try {
             ImageIcon imagen = new ImageIcon(this.getClass().getResource(this.rImagen));
             Image ajustarImagen = imagen.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
             return new ImageIcon(ajustarImagen);
+        } catch (Exception e) {
+            return null;
         }
     }
 }

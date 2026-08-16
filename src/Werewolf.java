@@ -2,8 +2,8 @@
 
 public final class Werewolf extends Pieza{
 
-    public Werewolf(Jugador propietarioPieza) {
-        super("Werewolf", 5,5,2, propietarioPieza);
+    public Werewolf(Jugador propietarioPieza, String rImagen) {
+        super("Werewolf", 5,5,2, propietarioPieza, rImagen);
     }
 
     @Override

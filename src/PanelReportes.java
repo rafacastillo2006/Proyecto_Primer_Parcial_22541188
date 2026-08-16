@@ -56,5 +56,36 @@ public class PanelReportes extends JFrame {
         fondoLabel.add(panelReportes);
         setVisible(true);
 
+        JButton regresarMenu  =  new JButton("Regresar");
+        regresarMenu.setOpaque(true);
+        regresarMenu.setBackground(Color.white);
+        regresarMenu.setFont(new Font("Algerian", Font.BOLD, 20));
+        JPanel panelBotonRegresar = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        panelBotonRegresar.setOpaque(false);
+        panelBotonRegresar.add(regresarMenu);
+        fondoLabel.add(panelBotonRegresar);
+
+        GridBagConstraints ubucacionRegresar = new GridBagConstraints();
+        ubucacionRegresar.gridx = 0;
+        ubucacionRegresar.gridy = 0;
+        ubucacionRegresar.weightx = 1.0;
+        ubucacionRegresar.weighty = 1.0;
+        ubucacionRegresar.anchor = GridBagConstraints.LAST_LINE_END;
+        ubucacionRegresar.insets = new Insets(0, 0, 30, 30);
+        fondoLabel.add(panelBotonRegresar, ubucacionRegresar);
+
+        botonRankingJugadores.addActionListener(e -> {
+            new RankingJugadores(gestorJugadores);
+            dispose();
+        });
+        botonMisReportes.addActionListener(e -> {
+            new MisReportes(gestorJugadores);
+        });
+        regresarMenu.addActionListener(e -> {
+            new PaginaInicio(this.gestorJugadores);
+            this.dispose();
+        });
     }
+
+
 }
