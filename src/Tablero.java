@@ -696,20 +696,37 @@ public class Tablero extends JFrame {
 
         finalizarAccion();
     }
-    private boolean jugadorTienePiezaDisponible(String nombrePieza) {
-        for (int f = 0; f < 6; f++) {
-            for (int c = 0; c < 6; c++) {
-                Pieza pieza = tableroLogico[f][c];
 
-                if (pieza != null &&
-                        pieza.getPropietario() == jugadorEnTurno &&
-                        pieza.getNombre().equalsIgnoreCase(nombrePieza)) {
-                    return true;
-                }
-            }
+    private boolean jugadorTienePiezaDisponible(String nombrePieza) {
+        return jugadorTienePiezaDisponibleRecursivo(nombrePieza, 0, 0);
+    }
+
+    private boolean jugadorTienePiezaDisponibleRecursivo(String nombrePieza, int fila, int col) {
+        if (fila >= 6) {
+            return false;
         }
 
-        return false;
+        if (col >= 6) {
+            return jugadorTienePiezaDisponibleRecursivo(
+                    nombrePieza,
+                    fila + 1,
+                    0
+            );
+        }
+
+        Pieza pieza = tableroLogico[fila][col];
+
+        if (pieza != null &&
+                pieza.getPropietario() == jugadorEnTurno &&
+                pieza.getNombre().equalsIgnoreCase(nombrePieza)) {
+            return true;
+        }
+
+        return jugadorTienePiezaDisponibleRecursivo(
+                nombrePieza,
+                fila,
+                col + 1
+        );
     }
 
     private void procesarAtaqueNormal(
@@ -1110,30 +1127,19 @@ public class Tablero extends JFrame {
     }
 
     private void verificarFinDeJuego() {
-        boolean negroTienePiezas = false;
-        boolean blancoTienePiezas = false;
+        boolean negroTienePiezas =
+                contarPiezasRecursivo(
+                        jugadorNegro,
+                        0,
+                        0
+                ) > 0;
 
-        for (int f = 0; f < 6; f++) {
-            for (int c = 0; c < 6; c++) {
-
-                Pieza p = tableroLogico[f][c];
-
-                if (p != null) {
-
-                    if (p.getPropietario() ==
-                            jugadorNegro) {
-
-                        negroTienePiezas = true;
-                    }
-
-                    if (p.getPropietario() ==
-                            jugadorBlanco) {
-
-                        blancoTienePiezas = true;
-                    }
-                }
-            }
-        }
+        boolean blancoTienePiezas =
+                contarPiezasRecursivo(
+                        jugadorBlanco,
+                        0,
+                        0
+                ) > 0;
 
         if (!negroTienePiezas ||
                 !blancoTienePiezas) {
@@ -1156,6 +1162,39 @@ public class Tablero extends JFrame {
             new MenuPrincipal(gestorJugadores);
             this.dispose();
         }
+    }
+
+    private int contarPiezasRecursivo(
+            Jugador jugador,
+            int fila,
+            int col) {
+
+        if (fila >= 6) {
+            return 0;
+        }
+
+        if (col >= 6) {
+            return contarPiezasRecursivo(
+                    jugador,
+                    fila + 1,
+                    0
+            );
+        }
+
+        Pieza pieza = tableroLogico[fila][col];
+
+        int cantidad =
+                (pieza != null &&
+                        pieza.getPropietario() == jugador)
+                        ? 1
+                        : 0;
+
+        return cantidad +
+                contarPiezasRecursivo(
+                        jugador,
+                        fila,
+                        col + 1
+                );
     }
 
     private void retirarDePartida() {
