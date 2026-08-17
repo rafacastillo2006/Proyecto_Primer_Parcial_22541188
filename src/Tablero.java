@@ -90,14 +90,14 @@ public class Tablero extends JFrame {
         labelTurno = new JLabel(
                 "Turno: " + jugadorEnTurno.getUsername()
         );
-        labelTurno.setFont(new Font("Serif", Font.BOLD, 24));
+        labelTurno.setFont(new Font("Algerian", Font.BOLD, 24));
         labelTurno.setForeground(azulBrilloso);
         labelTurno.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         labelSubtitulo = new JLabel(
-                "Gira la ruleta para determinar qué pieza puede actuar."
+                "Gira la ruleta para jugar el turno."
         );
-        labelSubtitulo.setFont(new Font("Serif", Font.ITALIC, 14));
+        labelSubtitulo.setFont(new Font("Algerian", Font.ITALIC, 14));
         labelSubtitulo.setForeground(new Color(180, 205, 235));
         labelSubtitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -128,7 +128,7 @@ public class Tablero extends JFrame {
                 "Gira la Ruleta",
                 SwingConstants.CENTER
         );
-        labelRuletaResultado.setFont(new Font("Serif", Font.BOLD, 16));
+        labelRuletaResultado.setFont(new Font("Algerian", Font.BOLD, 16));
         labelRuletaResultado.setForeground(azulBrilloso);
         labelRuletaResultado.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -154,7 +154,7 @@ public class Tablero extends JFrame {
                 new JLabel("Registro de Movimientos");
 
         labelRegistroMovimientos.setFont(
-                new Font("Serif", Font.BOLD, 14)
+                new Font("Algerian", Font.BOLD, 14)
         );
 
         labelRegistroMovimientos.setForeground(azulMedio);
@@ -193,7 +193,7 @@ public class Tablero extends JFrame {
 
         btnGirarRuleta = new JButton("Girar Ruleta");
         btnGirarRuleta.setFont(
-                new Font("Serif", Font.BOLD, 15)
+                new Font("Algerian", Font.BOLD, 15)
         );
         btnGirarRuleta.setBackground(azulMedio);
         btnGirarRuleta.setForeground(Color.WHITE);
@@ -205,7 +205,7 @@ public class Tablero extends JFrame {
 
         btnRetirarse = new JButton("Retirarse");
         btnRetirarse.setFont(
-                new Font("Serif", Font.BOLD, 13)
+                new Font("Algerian", Font.BOLD, 13)
         );
         btnRetirarse.setBackground(
                 new Color(25, 35, 55)
@@ -584,7 +584,7 @@ public class Tablero extends JFrame {
 
         } else {
             labelSubtitulo.setText(
-                    "Selecciona la casilla de destino."
+                    "Seleccionar casilla de destino"
             );
         }
     }
@@ -698,16 +698,16 @@ public class Tablero extends JFrame {
     }
 
     private boolean jugadorTienePiezaDisponible(String nombrePieza) {
-        return jugadorTienePiezaDisponibleRecursivo(nombrePieza, 0, 0);
+        return jugadorTienePiezaDisponibleR(nombrePieza, 0, 0);
     }
 
-    private boolean jugadorTienePiezaDisponibleRecursivo(String nombrePieza, int fila, int col) {
+    private boolean jugadorTienePiezaDisponibleR(String nombrePieza, int fila, int col) {
         if (fila >= 6) {
             return false;
         }
 
         if (col >= 6) {
-            return jugadorTienePiezaDisponibleRecursivo(
+            return jugadorTienePiezaDisponibleR(
                     nombrePieza,
                     fila + 1,
                     0
@@ -722,7 +722,7 @@ public class Tablero extends JFrame {
             return true;
         }
 
-        return jugadorTienePiezaDisponibleRecursivo(
+        return jugadorTienePiezaDisponibleR(
                 nombrePieza,
                 fila,
                 col + 1
@@ -776,7 +776,7 @@ public class Tablero extends JFrame {
 
             registrarAccion(
                     objetivo.getNombre() +
-                            " ha sido destruido."
+                            " fue destruido."
             );
 
             verificarFinDeJuego();
@@ -986,7 +986,7 @@ public class Tablero extends JFrame {
 
             registrarAccion(
                     objetivo.getNombre() +
-                            " ha sido destruido."
+                            " fue destruido."
             );
 
             verificarFinDeJuego();
@@ -1128,18 +1128,18 @@ public class Tablero extends JFrame {
 
     private void verificarFinDeJuego() {
         boolean negroTienePiezas =
-                contarPiezasRecursivo(
+                contarPiezasR(
                         jugadorNegro,
                         0,
                         0
                 ) > 0;
 
         boolean blancoTienePiezas =
-                contarPiezasRecursivo(
+                0 < contarPiezasR(
                         jugadorBlanco,
                         0,
                         0
-                ) > 0;
+                );
 
         if (!negroTienePiezas ||
                 !blancoTienePiezas) {
@@ -1155,7 +1155,7 @@ public class Tablero extends JFrame {
 
             JOptionPane.showMessageDialog(
                     this,
-                    "¡PARTIDA FINALIZADA!\nGanador: " +
+                    "La partida ha finalizado.\nGanador: " +
                             ganador.getUsername()
             );
 
@@ -1164,7 +1164,7 @@ public class Tablero extends JFrame {
         }
     }
 
-    private int contarPiezasRecursivo(
+    private int contarPiezasR(
             Jugador jugador,
             int fila,
             int col) {
@@ -1174,7 +1174,7 @@ public class Tablero extends JFrame {
         }
 
         if (col >= 6) {
-            return contarPiezasRecursivo(
+            return contarPiezasR(
                     jugador,
                     fila + 1,
                     0
@@ -1190,7 +1190,7 @@ public class Tablero extends JFrame {
                         : 0;
 
         return cantidad +
-                contarPiezasRecursivo(
+                contarPiezasR(
                         jugador,
                         fila,
                         col + 1

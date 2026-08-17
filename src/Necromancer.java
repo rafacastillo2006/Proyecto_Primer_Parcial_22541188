@@ -1,4 +1,4 @@
-public class Necromancer extends Pieza {
+public final class Necromancer extends Pieza {
 
     public Necromancer(Jugador propietario, String rImagen) {
         super("Necromancer", 4, 2, 1, propietario, rImagen);

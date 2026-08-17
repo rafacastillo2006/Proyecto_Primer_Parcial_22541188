@@ -1,4 +1,4 @@
-public class Zombie extends Pieza {
+public final class Zombie extends Pieza {
 
     public Zombie(Jugador propietario, String rImagen) {
         super("Zombie", 1, 1, 0, propietario, rImagen);
